@@ -9,7 +9,7 @@ import StaticWeather from "./StaticWeather/StaticWeather";
 function App() {
   const [currentWeather, setCurrentWeather] = useState(
     JSON.parse(localStorage.getItem("currentWeather")) || null
-  );
+  );  
   localStorage.setItem("currentWeather", JSON.stringify(currentWeather));
 
   const handleSearchChange = (searchData) => {

@@ -8,18 +8,6 @@ export const geoApiOptions = {
   },
 };
 
-export const initialWeatherData = [
-  {
-    id: "currentWeatherStatic1",
-  },
-  {
-    id: "currentWeatherStatic2",
-  },
-  {
-    id: "currentWeatherStatic5",
-  },
-];
-
 export const GEO_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
 
 export const WEATHER_URL = "https://api.openweathermap.org/data/2.5";
@@ -35,17 +23,11 @@ export const handleOnSearchChange = (searchData, setWeather) => {
   });
 };
 
-export const handleOnSearchChangeStatic = (searchData, id, setWeather) => {
+export const handleOnSearchChangeStatic = (searchData, setWeather) => {
   const [lat, lon] = searchData.value.split(" ");
   const url1 = `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_CODE}&units=metric`;
   axios.get(url1).then(async (response) => {
     const weatherResponse = response.data;
-    const newData = { city: searchData.label, ...weatherResponse };
-    setWeather((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, data: newData } : item
-      )
-    );
-    localStorage.setItem(id, JSON.stringify(newData));
+    setWeather({ city: searchData.label, ...weatherResponse });
   });
 };
