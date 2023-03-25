@@ -1,0 +1,19 @@
+.weather_static {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-self: self-start;
+}
+.weather_static_block {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 33.33%;
+  align-items: center;
+}
+.static_search {
+  width: 50%;
+}
+.button {
+  margin-top: 0px;
+  position: absolute;
+}

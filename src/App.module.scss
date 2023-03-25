@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "Outfit";
+  src: url(../public/font/Outfit-Medium.ttf);
+}
+body{
+  margin: 0;
+}
+.container {
+  font-family: "Outfit";
+  height: 100vh;
+  display: grid;
+  color: white;
+  grid-template-rows: 8% 4% 48% 40%;
+  background-image: url(../public/back.jpg);
+  background-repeat: repeat;
+  background-size: cover;
+  transition: 0.5s;
+}
+.input {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+::placeholder {
+  color: rgba(255, 255, 255, 0.557);
+}
+.date {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.weather_static{
+  display: flex;
+  justify-content: space-around;
+  align-self: self-start;
+}
+
+.button{
+  position: absolute;
+}
+@media screen and (max-width:600px) {
+  .weather_static{
+    flex-direction: column;
+  }
+}
