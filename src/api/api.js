@@ -16,7 +16,7 @@ export const initialWeatherData = [
     id: "currentWeatherStatic2",
   },
   {
-    id: "currentWeatherStatic3",
+    id: "currentWeatherStatic4",
   },
 ];
 
