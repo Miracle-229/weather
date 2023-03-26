@@ -8,17 +8,7 @@ export const geoApiOptions = {
   },
 };
 
-export const initialWeatherData = [
-  {
-    id: "currentWeatherStatic1",
-  },
-  {
-    id: "currentWeatherStatic2",
-  },
-  {
-    id: "currentWeatherStatic3",
-  },
-];
+
 
 export const GEO_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
 

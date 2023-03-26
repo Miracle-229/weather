@@ -1,7 +1,7 @@
 .weather_static {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-self: self-start;
 }
 .weather_static_block {
@@ -9,11 +9,20 @@
   flex-direction: column;
   flex: 0 0 33.33%;
   align-items: center;
+  margin-top: 40px;
+  transition: 0.5s;
 }
 .static_search {
   width: 50%;
 }
-.button {
+.button_search {
   margin-top: 0px;
   position: absolute;
+}
+
+.button_add {
+  margin-top: 20px;
+  font-size: 150px;
+  margin-left: 10vw;
+  align-self: center;
 }
