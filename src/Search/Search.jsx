@@ -25,7 +25,7 @@ function Search({ onSearchChange }, props) {
       })
       .catch((err) => console.error(err));
   };
-  console.log(search);
+  
   return (
     <AsyncPaginate
       placeholder="Search cities"

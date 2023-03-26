@@ -22,12 +22,12 @@ function App() {
 
   const handleSearchFocus = () => {
     searchRef.current = true;
-    container.current.style.gridTemplateRows = "8% 22% 30% 40%";
+    container.current.style.gridTemplateRows = "8% 22% 26% 44%";
   };
 
   const handleSearchBlur = () => {
     searchRef.current = false;
-    container.current.style.gridTemplateRows = "8% 4% 48% 40%";
+    container.current.style.gridTemplateRows = "8% 4% 44% 44%";
   };
   return (
     <div className="App">

@@ -8,8 +8,6 @@ export const geoApiOptions = {
   },
 };
 
-
-
 export const GEO_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
 
 export const WEATHER_URL = "https://api.openweathermap.org/data/2.5";
@@ -25,10 +23,11 @@ export const handleOnSearchChange = (searchData, setWeather) => {
   });
 };
 
-export const handleOnSearchChangeStatic = (searchData, id, setWeather) => {
+export const handleOnSearchChangeStatic = async (searchData, id, setWeather) => {
   const [lat, lon] = searchData.value.split(" ");
   const url1 = `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_CODE}&units=metric`;
-  axios.get(url1).then(async (response) => {
+  try {
+    const response = await axios.get(url1);
     const weatherResponse = response.data;
     const newData = { city: searchData.label, ...weatherResponse };
     setWeather((prevData) =>
@@ -36,6 +35,14 @@ export const handleOnSearchChangeStatic = (searchData, id, setWeather) => {
         item.id === id ? { ...item, data: newData } : item
       )
     );
-    localStorage.setItem(id, JSON.stringify(newData));
-  });
+    const staticWeatherData =
+      JSON.parse(localStorage.getItem("staticWeatherData")) || {};
+    staticWeatherData[id].data = newData;
+    localStorage.setItem(
+      "staticWeatherData",
+      JSON.stringify(staticWeatherData)
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
