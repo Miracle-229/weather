@@ -5,11 +5,13 @@ import { WiHumidity } from "react-icons/wi";
 
 function Component({ data }) {
   const back = useRef(null);
+  
   useEffect(() => {
     if (back.current && data.main.temp > 17) {
       back.current.style.backgroundImage = "url(original.jpg)";
     } else back.current.style.backgroundImage = "url(forest.jpg)";
   }, [data]);
+
   return (
     <div className={style.component_block}>
       <div ref={back} className={style.component}>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Search from "../Search/Search";
-import Component from "../Component/Component";
-import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
-import { handleOnSearchChangeStatic } from "../api/api";
-import style from "./StaticWeather.module.scss";
+import React, { useEffect, useState } from 'react';
+import Search from '../Search/Search';
+import Component from '../Component/Component';
+import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai';
+import { handleOnSearchChangeStatic } from '../api/api';
+import style from './StaticWeather.module.scss';
 
 function StaticWeather() {
   const [staticWeather, setStaticWeather] = useState([]);
@@ -13,20 +13,20 @@ function StaticWeather() {
     const newData = { id: newId, data: null };
     setStaticWeather([...staticWeather, newData]);
     const staticWeatherData =
-      JSON.parse(localStorage.getItem("staticWeatherData")) || {};
+      JSON.parse(localStorage.getItem('staticWeatherData')) || {};
     staticWeatherData[newId] = newData;
     localStorage.setItem(
-      "staticWeatherData",
+      'staticWeatherData',
       JSON.stringify(staticWeatherData)
     );
   };
 
   const deleteNewWeather = (id) => {
     const staticWeatherData =
-      JSON.parse(localStorage.getItem("staticWeatherData")) || {};
+      JSON.parse(localStorage.getItem('staticWeatherData')) || {};
     delete staticWeatherData[id];
     localStorage.setItem(
-      "staticWeatherData",
+      'staticWeatherData',
       JSON.stringify(staticWeatherData)
     );
     setStaticWeather((prevData) => prevData.filter((item) => item.id !== id));
@@ -38,7 +38,7 @@ function StaticWeather() {
 
   useEffect(() => {
     const staticWeatherData =
-      JSON.parse(localStorage.getItem("staticWeatherData")) || {};
+      JSON.parse(localStorage.getItem('staticWeatherData')) || {};
     const weatherData = Object.values(staticWeatherData);
     setStaticWeather(weatherData);
   }, []);
