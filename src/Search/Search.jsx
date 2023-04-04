@@ -1,7 +1,7 @@
 import React from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { useState } from 'react';
-import { loadOptions } from '../api/api';
+import { searchWeather } from '../api/api';
 import style from './Search.module.scss';
 
 function Search({ onSearchChange }, props) {
@@ -18,7 +18,7 @@ function Search({ onSearchChange }, props) {
       debounceTimeout={600}
       value={search}
       onChange={handleOnChange}
-      loadOptions={loadOptions}
+      loadOptions={searchWeather}
     />
   );
 }

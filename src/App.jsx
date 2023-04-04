@@ -1,19 +1,19 @@
-import React, { useRef, useState } from "react";
-import style from "./App.module.scss";
-import Search from "./Search/Search";
-import Component from "./Component/Component";
-import { handleOnSearchChange } from "./api/api";
-import Moment from "react-moment";
-import StaticWeather from "./StaticWeather/StaticWeather";
+import React, { useRef, useState } from 'react';
+import style from './App.module.scss';
+import Search from './Search/Search';
+import WeatherCard from './WeatherCard/WeatherCard';
+import { getWeather } from './api/api';
+import Moment from 'react-moment';
+import AddedWeather from './AddedWeather/AddedWeather';
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(
-    JSON.parse(localStorage.getItem("currentWeather")) || null
+    JSON.parse(localStorage.getItem('currentWeather')) || null
   );
-  localStorage.setItem("currentWeather", JSON.stringify(currentWeather));
+  localStorage.setItem('currentWeather', JSON.stringify(currentWeather));
 
-  const handleSearchChange = (searchData) => {
-    handleOnSearchChange(searchData, setCurrentWeather);
+  const getOnWeather = (searchData) => {
+    getWeather(searchData, setCurrentWeather);
   };
 
   const searchRef = useRef(false);
@@ -22,12 +22,12 @@ function App() {
 
   const handleSearchFocus = () => {
     searchRef.current = true;
-    container.current.style.gridTemplateRows = "8% 22% 26% 44%";
+    container.current.style.gridTemplateRows = '8% 22% 26% 44%';
   };
 
   const handleSearchBlur = () => {
     searchRef.current = false;
-    container.current.style.gridTemplateRows = "8% 4% 44% 44%";
+    container.current.style.gridTemplateRows = '8% 4% 44% 44%';
   };
   return (
     <div className="App">
@@ -37,7 +37,7 @@ function App() {
           onFocus={handleSearchFocus}
           className={style.input}
         >
-          <Search onSearchChange={handleSearchChange} />
+          <Search onSearchChange={getOnWeather} />
         </div>
         <div className={style.time}>
           <Moment
@@ -46,8 +46,8 @@ function App() {
             className={style.date}
           ></Moment>
         </div>
-        {currentWeather && <Component data={currentWeather}></Component>}
-        <StaticWeather></StaticWeather>
+        {currentWeather && <WeatherCard data={currentWeather}/>}
+        <AddedWeather/>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ export const WEATHER_URL = 'https://api.openweathermap.org/data/2.5';
 
 export const WEATHER_CODE = '895284fb2d2c50a520ea537456963d9c';
 
-export const loadOptions = async (inputValue) => {
+export const searchWeather = async (inputValue) => {
   const url = `${GEO_URL}/cities?namePrefix=${inputValue}`;
   try {
     const response = await axios.get(url, geoApiOptions);
@@ -31,7 +31,7 @@ export const loadOptions = async (inputValue) => {
   }
 };
 
-export const handleOnSearchChange = async (searchData, setWeather) => {
+export const getWeather = async (searchData, setWeather) => {
   const [lat, lon] = searchData.value.split(' ');
   const url1 = `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_CODE}&units=metric`;
   try {
@@ -43,7 +43,7 @@ export const handleOnSearchChange = async (searchData, setWeather) => {
   }
 };
 
-export const handleOnSearchChangeStatic = async (
+export const getAddedWeather = async (
   searchData,
   id,
   setWeather
@@ -60,10 +60,10 @@ export const handleOnSearchChangeStatic = async (
       )
     );
     const staticWeatherData =
-      JSON.parse(localStorage.getItem('staticWeatherData')) || {};
+      JSON.parse(localStorage.getItem('addedWeatherData')) || {};
     staticWeatherData[id].data = newData;
     localStorage.setItem(
-      'staticWeatherData',
+      'addedWeatherData',
       JSON.stringify(staticWeatherData)
     );
   } catch (error) {

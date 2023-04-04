@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import style from "./Component.module.scss";
+import style from "./WeatherCard.module.scss";
 import { TiWeatherWindy, TiThermometer } from "react-icons/ti";
 import { WiHumidity } from "react-icons/wi";
 
-function Component({ data }) {
+function WeatherCard({ data }) {
   const back = useRef(null);
   
   useEffect(() => {
@@ -49,4 +49,4 @@ function Component({ data }) {
   );
 }
 
-export default Component;
+export default WeatherCard;
