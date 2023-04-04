@@ -43,11 +43,14 @@ export const getWeather = async (searchData, setWeather) => {
   }
 };
 
-export const getAddedWeather = async (
-  searchData,
-  id,
-  setWeather
-) => {
+export const getLocalStorage = () => {
+  return JSON.parse(localStorage.getItem('addedWeatherData')) || {};
+};
+export const setLocalStorage = (data) => {
+  localStorage.setItem('addedWeatherData', JSON.stringify(data));
+};
+
+export const getAddedWeather = async (searchData, id, setWeather) => {
   const [lat, lon] = searchData.value.split(' ');
   const url1 = `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_CODE}&units=metric`;
   try {
@@ -59,13 +62,9 @@ export const getAddedWeather = async (
         item.id === id ? { ...item, data: newData } : item
       )
     );
-    const staticWeatherData =
-      JSON.parse(localStorage.getItem('addedWeatherData')) || {};
-    staticWeatherData[id].data = newData;
-    localStorage.setItem(
-      'addedWeatherData',
-      JSON.stringify(staticWeatherData)
-    );
+    const addedWeatherData = getLocalStorage();
+    addedWeatherData[id].data = newData;
+    setLocalStorage(addedWeatherData);
   } catch (error) {
     console.log(error);
   }

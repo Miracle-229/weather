@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Search from '../Search/Search';
 import WeatherCard from '../WeatherCard/WeatherCard';
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai';
-import { getAddedWeather } from '../api/api';
+import { getAddedWeather, getLocalStorage, setLocalStorage } from '../api/api';
 import style from './AddedWeather.module.scss';
 
 function AddedWeather() {
@@ -12,17 +12,15 @@ function AddedWeather() {
     const newId = `added_${Math.random().toString(36).substring(2, 9)}`;
     const newData = { id: newId, data: null };
     setAddedWeather([...addedWeather, newData]);
-    const addedWeatherData =
-      JSON.parse(localStorage.getItem('addedWeatherData')) || {};
+    const addedWeatherData = getLocalStorage();
     addedWeatherData[newId] = newData;
-    localStorage.setItem('addedWeatherData', JSON.stringify(addedWeatherData));
+    setLocalStorage(addedWeatherData);
   };
 
   const deleteNewWeather = (id) => {
-    const addedWeatherData =
-      JSON.parse(localStorage.getItem('addedWeatherData')) || {};
+    const addedWeatherData = getLocalStorage();
     delete addedWeatherData[id];
-    localStorage.setItem('addedWeatherData', JSON.stringify(addedWeatherData));
+    setLocalStorage(addedWeatherData);
     setAddedWeather((prevData) => prevData.filter((item) => item.id !== id));
   };
 
@@ -31,8 +29,7 @@ function AddedWeather() {
   };
 
   useEffect(() => {
-    const addedWeatherData =
-      JSON.parse(localStorage.getItem('addedWeatherData')) || {};
+    const addedWeatherData = getLocalStorage();
     const weatherData = Object.values(addedWeatherData);
     setAddedWeather(weatherData);
   }, []);
