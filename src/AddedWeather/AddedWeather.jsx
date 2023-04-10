@@ -24,8 +24,21 @@ function AddedWeather() {
     setAddedWeather((prevData) => prevData.filter((item) => item.id !== id));
   };
 
-  const getOnAddedWeather = (searchData, id) => {
-    getAddedWeather(searchData, id, setAddedWeather);
+ const getOnAddedWeather = (searchData, id) => {
+    getAddedWeather(searchData, id)
+      .then((newData) => {
+        setAddedWeather((prevData) =>
+          prevData.map((item) =>
+            item.id === id ? { ...item, data: newData } : item
+          )
+        );
+        const addedWeatherData = getLocalStorage();
+        addedWeatherData[id].data = newData;
+        setLocalStorage(addedWeatherData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {

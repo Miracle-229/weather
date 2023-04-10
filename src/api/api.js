@@ -3,16 +3,16 @@ import axios from 'axios';
 export const geoApiOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': 'e7570d208amsh0afcc05e8d8c305p19650djsn0493e9d485d1',
-    'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+    'X-RapidAPI-Key': process.env.REACT_APP_GEO_API_KEY,
+    'X-RapidAPI-Host': process.env.REACT_APP_GEO_API_HOST,
   },
 };
 
-export const GEO_URL = 'https://wft-geo-db.p.rapidapi.com/v1/geo';
+export const GEO_URL = process.env.REACT_APP_GEO_URL;
 
-export const WEATHER_URL = 'https://api.openweathermap.org/data/2.5';
+export const WEATHER_URL = process.env.REACT_APP_WEATHER_URL;
 
-export const WEATHER_CODE = '895284fb2d2c50a520ea537456963d9c';
+export const WEATHER_CODE = process.env.REACT_APP_WEATHER_CODE;
 
 export const searchWeather = async (inputValue) => {
   const url = `${GEO_URL}/cities?namePrefix=${inputValue}`;
@@ -31,17 +31,17 @@ export const searchWeather = async (inputValue) => {
   }
 };
 
-export const getWeather = async (searchData, setWeather) => {
+export const getWeather = async (searchData) => {
   const [lat, lon] = searchData.value.split(' ');
   const url1 = `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_CODE}&units=metric`;
   try {
     const response = await axios.get(url1);
     const weatherResponse = response.data;
-    setWeather({ city: searchData.label, ...weatherResponse });
+    return { city: searchData.label, ...weatherResponse };
   } catch (error) {
     console.log(error);
   }
-};
+}; 
 
 export const getLocalStorage = () => {
   return JSON.parse(localStorage.getItem('addedWeatherData')) || {};
@@ -50,21 +50,14 @@ export const setLocalStorage = (data) => {
   localStorage.setItem('addedWeatherData', JSON.stringify(data));
 };
 
-export const getAddedWeather = async (searchData, id, setWeather) => {
+export const getAddedWeather = async (searchData, id) => {
   const [lat, lon] = searchData.value.split(' ');
   const url1 = `${WEATHER_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_CODE}&units=metric`;
   try {
     const response = await axios.get(url1);
     const weatherResponse = response.data;
     const newData = { city: searchData.label, ...weatherResponse };
-    setWeather((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, data: newData } : item
-      )
-    );
-    const addedWeatherData = getLocalStorage();
-    addedWeatherData[id].data = newData;
-    setLocalStorage(addedWeatherData);
+    return newData;
   } catch (error) {
     console.log(error);
   }

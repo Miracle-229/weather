@@ -14,33 +14,13 @@ body {
   height: 100vh;
   display: grid;
   color: white;
-  grid-template-rows: 8% 4% 44% 44%;
+  grid-template-rows: 56% 44%;
   transition: 0.5s;
 }
-.input {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-}
-::placeholder {
-  color: rgba(255, 255, 255, 0.557);
-}
-.date {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-}
-.weather_static {
-  display: flex;
-  justify-content: space-around;
-  align-self: self-start;
-}
+
+
 
 .button {
   position: absolute;
 }
-@media screen and (max-width: 600px) {
-  .weather_static {
-    flex-direction: column;
-  }
-}
+
