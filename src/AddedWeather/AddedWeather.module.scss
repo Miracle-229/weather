@@ -1,0 +1,36 @@
+.weather_static {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-self: self-start;
+  padding-bottom: 50px;
+}
+.weather_static_block {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 33.33%;
+  align-items: center;
+  margin-top: 40px;
+  transition: 1s;
+}
+.static_search {
+  width: 50%;
+  cursor: text;
+}
+.button_search {
+  transition: 0.5s;
+  margin-top: 45px;
+  margin-right: 25vh;
+  position: absolute;
+  padding: 0px;
+  font-size: 3vh;
+  cursor: pointer;
+}
+
+.button_add {
+  margin-top: 20px;
+  font-size: 15vh;
+  margin-left: 10vw;
+  align-self: center;
+  cursor: pointer;
+}

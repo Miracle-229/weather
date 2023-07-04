@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Outfit";
+  src: url(../public/font/Outfit-Medium.ttf);
+}
+body {
+  margin: 0;
+  background-image: url(../public/back.jpg);
+  background-attachment:scroll;
+  background-repeat: repeat;
+  background-origin: content-box;
+}
+.container {
+  font-family: "Outfit";
+  height: 100vh;
+  display: grid;
+  color: white;
+  grid-template-rows: 56% 44%;
+  transition: 0.5s;
+}
+
+
+
+.button {
+  position: absolute;
+}
+
